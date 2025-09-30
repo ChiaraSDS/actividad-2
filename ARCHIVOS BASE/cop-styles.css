@@ -1,0 +1,61 @@
+body{font-family: "outfit" ; }
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;  
+}
+
+.nav-custom ul{ 
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 ;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+
+.nav-custom li{
+    margin: 5% ;
+    text-decoration: none;
+    padding: 0 2%;
+    display: inline-block;
+    flex-wrap: nowrap;
+}
+
+.nav-custom a{
+    text-decoration: none;
+    color: #1b1b1b;
+    display: inline-block;
+}
+.nav-custom a:hover{
+    text-decoration: underline;
+}
+
+.marca{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rrss-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.rrss-links a img{
+    display: flex;
+    width: 30px;
+}
+
+/* Responsive helper opcional */
+@media (max-width: 600px) {
+    .nav-custom ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

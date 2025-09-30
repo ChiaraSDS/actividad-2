@@ -1,0 +1,174 @@
+body{font-family: "outfit" ; }
+:root{
+    --pink:#ff9ada;
+    --pink-soft:#fde1f5;
+    --column:#dcdcdc;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;  
+}
+
+.parrafo1{font-weight: bold;}
+
+
+.nav-custom ul{ 
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 ;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+
+.nav-custom li{
+    margin: 5% ;
+    text-decoration: none;
+    padding: 0 2%;
+    display: inline-block;
+    flex-wrap: nowrap;
+}
+
+.nav-custom a{
+    text-decoration: none;
+    color: #1b1b1b;
+    display: inline-block;
+    white-space: nowrap;
+}
+.nav-custom a:hover{
+    text-decoration: underline;
+}
+
+/* .h1 titu-pag{
+    color: #e79ec6 ;
+}
+ */
+.button{
+    margin-top: 2%;
+    cursor: pointer;
+    padding: 5%;
+    background-color: #f0abe4;
+    border: none;
+    border-radius: 3px ;
+}
+
+.sm-img1{
+width: 50%px;
+padding-left: 15%;
+}
+
+.sm-img1 img{
+    width: 100%;
+}
+
+.ind-sec1{
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    margin: 2%;
+}
+
+.pag-sec1{
+    display:flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.pag-sec2{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.pat-sec1 h2,
+.pat-sec1 p {
+text-align: center;
+}
+
+.pat-sec2 .card {
+width: 100%;
+max-width: 18rem;
+}
+
+.bot1{
+    justify-content: center;    
+}
+
+.img1{
+width: 250px;
+padding-left: 15%;
+}
+
+.img1 img{
+    width: 100%;
+}
+
+.img2{
+width: 50%;
+padding-right: 5%;
+padding-left: 5%;
+}
+
+.img2 img{
+    width: 100%;
+}
+.textoppal{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.bg-pink{ background: var(--pink-soft); }
+
+.contact-column{
+    background: var(--column);
+    width: min(320px, 90vw);
+}
+
+.contact-photo{
+    width: 160px;
+    aspect-ratio: 1/1;
+    border-color: var(--pink);
+    background: transparent;
+    color: var(--pink);
+    font-size: 1.5rem;
+}
+
+.contact-img{ 
+width:100%; height:100%; object-fit:cover;
+}
+
+.btn-contact{
+    background: var(--pink);
+    border: none;
+    letter-spacing: .5px;
+}
+
+
+.marca{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rrss-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.rrss-links a img{
+    display: flex;
+    width: 30px;
+}
+
+/* Responsive helper opcional */
+@media (max-width: 600px) {
+    .nav-custom ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
