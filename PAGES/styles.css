@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .container {
   width: min(1100px, 92vw);
   margin-inline: auto;
@@ -520,6 +521,23 @@ header {
   padding: 0 2%;
 }
 
+header .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem; /* separa título y menú */
+  flex-wrap: wrap; /* si no entra en una fila, el menú baja */
+}
+
+header .nomb {
+  flex: 1 1 auto;
+  min-width: 220px; /* evita que el título se colapse */
+}
+
+header .nav-custom {
+  flex: 0 1 auto;
+}
+
 .nav-custom ul {
   display: flex;
   justify-content: flex-end;
@@ -545,6 +563,21 @@ header {
   text-decoration: underline;
 }
 
+.nav-custom a {
+  white-space: normal;
+}
+
+@media (min-width: 992px) {
+  .nav-custom a {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 991.98px) {
+  header .nav-custom ul {
+    justify-content: center;
+    width: 100%;
+  }
+}
 .button {
   display: inline-flex;
   align-items: center;
@@ -674,8 +707,21 @@ header {
 
 .rrss-links {
   padding: 2%;
+  background: linear-gradient(90deg, #ff9ada, #ffffff);
+  background-size: 200% 200%;
+  animation: rrssGradient 10s infinite alternate;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
+@keyframes rrssGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
 .rrss-links a img {
   display: flex;
   width: 30px;
@@ -694,6 +740,9 @@ header {
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+    animation: none !important;
+  }
+  * .rrss-links {
     animation: none !important;
   }
 }

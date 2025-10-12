@@ -85,9 +85,6 @@ $btn-sizes:  sm, md, lg;
         $color:  if($tname == light, #1b1b1b, #f3f4f6);
         $border: if($tname == light, #e8e8e8, #2a2d32);
 
-        //x tamaño (inline para evitar variables indefinidas)
-        // padding/font-size/border-radius se resuelven con if() directamente en cada clase
-
         //clase boton solido
         .btn--#{$tname}--#{$sname} {
             @include btn-base;
@@ -139,12 +136,35 @@ $btn-sizes:  sm, md, lg;
 body { font-family: "Outfit"; }
 
 header { @include flex(space-between, center); padding: 0 2%; }
-
+// permitir salto de línea y evitar superposición
+header .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;        /* separa título y menú */
+    flex-wrap: wrap;  /* si no entra en una fila, el menú baja */
+}
+header .nomb { 
+    flex: 1 1 auto; 
+    min-width: 220px; /* evita que el título se colapse */
+}
+header .nav-custom { 
+    flex: 0 1 auto; 
+}
 .nav-custom {
     ul { @include flex(flex-end, center, nowrap); list-style: none; padding: 0; margin: 0; }
     li { margin: 5%; padding: 0 2%; display: inline-block; flex-wrap: nowrap; }
     a  { text-decoration: none; color: $text; display: inline-block; white-space: nowrap;
             &:hover { text-decoration: underline; } }
+}
+
+.nav-custom a { white-space: normal; }
+@media (min-width: 992px) { 
+    .nav-custom a { white-space: nowrap; } 
+}
+//Si baja el menu, centrarlo y ocupar todo
+@media (max-width: 991.98px) {
+    header .nav-custom ul { justify-content: center; width: 100%; }
 }
 
 .button { @include btn-base; margin-top: 2%; padding: 5%; background-color: $pink; border-radius: 3px; }
@@ -196,7 +216,21 @@ header { @include flex(space-between, center); padding: 0 2%; }
 
 .marca, .rrss-links { @include flex(center, center); }
 
-.rrss-links { padding: 2%; }
+//degradado animado rosa a blanco
+.rrss-links {
+    padding: 2%; 
+    background: linear-gradient(90deg, $pink, #ffffff);
+    background-size: 200% 200%;
+    animation: rrssGradient 10s infinite alternate;
+    border-radius: 12px;
+    @include shadow(1);
+    }
+
+//animacion
+@keyframes rrssGradient {
+    0%   { background-position:   0% 50%; }
+    100% { background-position: 100% 50%; }
+}
 
 .rrss-links a img { display: flex; width: 30px; }
 
@@ -207,5 +241,7 @@ header { @include flex(space-between, center); padding: 0 2%; }
 
 //usuarios que tienen menos movimiento
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  * { transition: none !important; animation: none !important;
+    .rrss-links { animation: none !important; }
+    }
 }
