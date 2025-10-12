@@ -35,9 +35,16 @@ $bp-lg: 1200px; //compu
 
 //los botones
 @mixin btn-base {
-    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-    border:none; cursor:pointer; line-height:1;
-    transition: transform .05s ease, filter .2s ease, box-shadow .2s ease;
+    display:inline-flex; 
+    align-items:center; 
+    justify-content:center; 
+    gap:.5rem;
+    border:none; 
+    cursor:pointer; 
+    line-height:1;
+    transition: transform .05s ease, 
+    filter .2s ease, 
+    box-shadow .2s ease;
 }
 
 .container {
@@ -145,19 +152,19 @@ header .container-fluid {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;        /* separa título y menú */
-    flex-wrap: wrap;  /* si no entra en una fila, el menú baja */
+    gap: 1rem; 
+    flex-wrap: wrap;
 }
 header .nomb { 
     flex: 1 1 auto; 
-    min-width: 220px; /* evita que el título se colapse */
+    min-width: 220px;
 }
 header .nav-custom { 
     flex: 0 1 auto; 
 }
 .nav-custom {
     ul { @include flex(flex-end, center, nowrap); list-style: none; padding: 0; margin: 0; }
-    li { margin: 5%; padding: 0 2%; display: inline-block; flex-wrap: nowrap; }
+    li { margin: 5%; padding: 0 2%; }
     a  { text-decoration: none; color: $text; display: inline-block; white-space: nowrap;
             &:hover { text-decoration: underline; } }
 }
@@ -169,16 +176,16 @@ header .nav-custom {
 //Si baja el menu, centrarlo y ocupar todo
 @media (max-width: 991.98px) {
     .nav-custom ul {
-        flex-wrap: wrap;      /* permite que pase a 2 líneas */
+        flex-wrap: wrap;      
         justify-content: center;
-        gap: .75rem;          /* usar gap en lugar de márgenes percentuales */
+        gap: .75rem;          
         width: 100%;
     }
     .nav-custom li {
-        margin: 0;            /* anula margin: 5% que provoca desborde */
+        margin: 0;            
         padding: 0 .25rem;
     }
-    .nav-custom a { white-space: normal; } /* permite cortar */
+    .nav-custom a { white-space: normal; } 
     }
 
 .button { @include btn-base; margin-top: 2%; padding: 5%; background-color: $pink; border-radius: 3px; }
@@ -189,7 +196,11 @@ header .nav-custom {
     img { @include img-fluid; }
 }
 
-.ind-sec1 { @include flex(center, center); height: 50%; margin: 2%; }
+.row.ind-sec1 { display: block; } // evitar forzar flex
+.ind-sec1 {
+    height: auto;
+    margin: 0;
+}
 
 .pag-sec1 { @include flex(center, flex-start); }
 
@@ -206,12 +217,13 @@ header .nav-custom {
 
 .bot1 { justify-content: center; }
 
-.img1 { width: 250px; padding-left: 15%;
-    img { @include img-fluid; }
+.img1, .img2 {
+    width: 100% !important;
+    padding: 0 !important;
 }
-.img2 { width: 50%; padding-right: 5%; padding-left: 5%;
-    img { @include img-fluid; }
-}
+.img1 img, .img2 img {
+    @include img-fluid;
+} 
 
 .textoppal { padding-left: 5%; padding-right: 5%; }
 
@@ -230,6 +242,8 @@ header .nav-custom {
 
 .marca, .rrss-links { @include flex(center, center); }
 
+.footer { text-align: center; }
+
 //degradado animado rosa a blanco
 .rrss-links {
     width: 100%;
@@ -238,9 +252,11 @@ header .nav-custom {
     animation: rrssGradient 12s infinite alternate;
     border-radius: 12px;
     @include shadow(1);
-    /* asegura que el fondo se vea aunque tenga solo imágenes */
     min-height: 64px;
+    @include flex(center, center);
+    gap: 1rem;
 }
+
 //animacion
 @keyframes rrssGradient {
     0%   { background-position:   0% 50%; }
@@ -250,14 +266,15 @@ header .nav-custom {
 .rrss-links a img { display: flex; width: 30px; }
 
 @media (max-width: $bp-sm) {
-    .nav-custom ul { flex-direction: column; align-items: center; gap: .5rem; }
     header { padding: 0 4%; }
-    .sm-img1 { width: 100%; padding-left: 0; }
-    .img2    { width: 100%; padding-right: 0; padding-left: 0; }
-    .img1    { width: min(250px, 80vw); padding-left: 0; }
+    .nav-custom ul { flex-direction: column; align-items: center; gap: .5rem; }
+    .bot1 { justify-content: center; }
+    .button { width: auto; padding: .7rem 1rem; }
+    .img1, .img2 { padding: 0; }
+    .ind-textoppal { text-align: center; }
 }
 
-//usuarios que tienen menos movimiento
+/* Usuarios con motion reducido */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important;}
-    }
+  * { transition: none !important; animation: none !important; }
+}
