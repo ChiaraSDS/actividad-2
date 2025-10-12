@@ -163,18 +163,42 @@ header .nav-custom {
     flex: 0 1 auto; 
 }
 .nav-custom {
-    ul { @include flex(flex-end, center, nowrap); gap: .75rem; list-style: none; padding: 0; margin: 0; }
-    li { margin: 0; padding: 0 2%; flex: 0 0 auto;}
-    a  { text-decoration: none; color: $text; display: block; white-space: nowrap;
-            &:hover { text-decoration: underline; } }
+    ul{
+        display:flex; align-items:center; justify-content:flex-end;
+        flex-wrap: nowrap;                 /* una línea por defecto */
+        gap:.75rem; list-style:none; margin:0; padding:0;
+    }
+    li{
+        margin:0;
+        padding:0 .5rem;                   /* antes 2% → podía romper ancho */
+        flex:0 0 auto;
+    }
+    a{
+        text-decoration:none; color:$text; display:block;
+        white-space:nowrap;                /* no cortar palabras del item */
+        &:hover{ text-decoration:underline; }
+    }
 }
 
 @media (min-width: 992px) {
+    header .container-fluid{ flex-wrap: nowrap; }
     .nav-custom ul { flex-wrap: nowrap; }
     .nav-custom a  { white-space: nowrap; }
 }
+
+@media (min-width: 768px){
+    header .container-fluid{ flex-wrap: nowrap !important; }
+    header .nomb{ flex:0 0 auto; }   
+    header .nav-custom{ flex:1 1 auto; }
+    .nav-custom ul{ flex-wrap: nowrap !important; justify-content:flex-end; }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .nomb h1{ font-size: 1.6rem; }   
+    .nav-custom ul{ gap:.5rem; }   
+    }
+
 //Si baja el menu, centrarlo y ocupar todo
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
     .nav-custom ul {
         flex-wrap: wrap;      
         justify-content: center;
@@ -185,7 +209,8 @@ header .nav-custom {
         margin: 0;            
         padding: 0 .25rem;
     }
-    .nav-custom a { white-space: normal; } 
+    .nav-custom a { white-space: normal;}
+    header { padding: 0 4%; } 
     }
 
 @media (min-width: 992px) {
