@@ -1,0 +1,211 @@
+@use "sass:color";
+
+$pink: #ff9ada;
+$pink-soft: #fde1f5;
+$column: #dcdcdc;
+$text: #1b1b1b;
+
+$bp-sm: 600px; //celu
+$bp-md: 900px; //tablet
+$bp-lg: 1200px; //compu
+
+//para los contenedores
+@mixin flex(
+    $justify: center, 
+    $align: center, 
+    $wrap: nowrap) {
+    display: flex; 
+    justify-content: $justify; 
+    align-items: $align; 
+    flex-wrap: $wrap;
+}
+@mixin img-fluid { 
+    width:100%; 
+    height:auto; 
+    display:block; 
+}
+
+//para las sombras
+@mixin shadow($level: 1, $tone: #000) {
+    @if $level == 0 { box-shadow: none; }
+    @else if $level == 1 { box-shadow: 0 1px 4px rgba($tone,.12); }
+    @else if $level == 2 { box-shadow: 0 6px 18px rgba($tone,.16); }
+    @else { box-shadow: 0 14px 32px rgba($tone,.22); }
+}
+
+//los botones
+@mixin btn-base {
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    border:none; cursor:pointer; line-height:1;
+    transition: transform .05s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.container {
+    width: min(1100px, 92vw);
+    margin-inline: auto;
+    @media (max-width: $bp-md) { width: min(900px, 94vw); } //tablet
+    @media (max-width: $bp-sm) { width: 92vw; } //celu
+}
+
+//temas claro y oscuro
+$themes: light, dark;
+
+@each $tname in $themes {
+    [data-theme="#{$tname}"] {
+        background: if($tname == light, #ffffff, #111214);
+        color:      if($tname == light, $text,    #f3f4f6);
+
+        a { color: if($tname == light, #1b1b1b, #f3f4f6); }
+
+        //superficies
+        .bg-pink        { background: if($tname == light, $pink-soft, color.mix($pink, #111, $weight: 30%)); }
+        .contact-column { background: if($tname == light, #fafafa,    #15171a); }
+        //bordes
+        .card,
+        .contact-column { border: 1px solid if($tname == light, #e8e8e8, #2a2d32); }
+    }
+}
+
+//light por defecto
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) { color-scheme: light; }
+    :root:not([data-theme]) body {
+        background: #ffffff;
+        color: $text;
+    }
+}
+
+$btn-themes: light, dark;
+$btn-sizes:  sm, md, lg;
+
+@each $tname in $btn-themes {
+    @each $sname in $btn-sizes {
+        //x tema
+        $bg:     if($tname == light, #ffffff, #111214);
+        $color:  if($tname == light, #1b1b1b, #f3f4f6);
+        $border: if($tname == light, #e8e8e8, #2a2d32);
+
+        //x tamaño (inline para evitar variables indefinidas)
+        // padding/font-size/border-radius se resuelven con if() directamente en cada clase
+
+        //clase boton solido
+        .btn--#{$tname}--#{$sname} {
+            @include btn-base;
+            background: $bg; 
+            color: $color; 
+            border: 1px solid $border;
+
+            padding: if($sname == sm, .45rem .75rem, if($sname == md, .65rem 1rem, .9rem 1.25rem));
+            font-size: if($sname == sm, .9rem,        if($sname == md, 1rem,        1.125rem));
+            border-radius: if($sname == sm, 8px,       if($sname == md, 10px,       14px));
+
+            &:hover  { filter: brightness(.97); }
+            &:active { transform: translateY(1px); }
+            &:focus-visible { outline: 2px solid $border; outline-offset: 2px; }
+        }
+
+        //borde color del texto y fondo transpar
+        .btn-outline--#{$tname}--#{$sname} {
+            @include btn-base;
+            background: transparent; 
+            color: $color; 
+            border: 1px solid $color;
+
+            padding: if($sname == sm, .45rem .75rem, if($sname == md, .65rem 1rem, .9rem 1.25rem));
+            font-size: if($sname == sm, .9rem,        if($sname == md, 1rem,        1.125rem));
+            border-radius: if($sname == sm, 8px,       if($sname == md, 10px,       14px));
+
+            &:hover  { background: rgba($color, .08); }
+            &:focus-visible { outline: 2px solid $color; outline-offset: 2px; }
+        }
+
+        //fantasma, solo texto
+        .btn-ghost--#{$tname}--#{$sname} {
+            @include btn-base;
+            background: transparent; 
+            color: $color; 
+            border: 1px solid transparent;
+
+            padding: if($sname == sm, .45rem .75rem, if($sname == md, .65rem 1rem, .9rem 1.25rem));
+            font-size: if($sname == sm, .9rem,        if($sname == md, 1rem,        1.125rem));
+            border-radius: if($sname == sm, 8px,       if($sname == md, 10px,       14px));
+
+            &:hover  { background: rgba($color, .06); }
+            &:focus-visible { outline: 2px solid $color; outline-offset: 2px; }
+        }
+    }
+}
+
+body { font-family: "Outfit"; }
+
+header { @include flex(space-between, center); padding: 0 2%; }
+
+.nav-custom {
+    ul { @include flex(flex-end, center, nowrap); list-style: none; padding: 0; margin: 0; }
+    li { margin: 5%; padding: 0 2%; display: inline-block; flex-wrap: nowrap; }
+    a  { text-decoration: none; color: $text; display: inline-block; white-space: nowrap;
+            &:hover { text-decoration: underline; } }
+}
+
+.button { @include btn-base; margin-top: 2%; padding: 5%; background-color: $pink; border-radius: 3px; }
+
+.parrafo1 { font-weight: bold; }
+
+.sm-img1 { width: 50%; padding-left: 15%;
+    img { @include img-fluid; }
+}
+
+.ind-sec1 { @include flex(center, center); height: 50%; margin: 2%; }
+
+.pag-sec1 { @include flex(center, flex-start); }
+
+.pag-sec2 { @include flex(space-evenly, center); }
+
+.pat-sec1 { h2, p { text-align: center; } }
+
+.pat-sec2 .card {
+    width: 100%; max-width: 18rem;
+    border-radius: 14px;
+    background: rgba(#fff, .6);
+    @include shadow(1);
+}
+
+.bot1 { justify-content: center; }
+
+.img1 { width: 250px; padding-left: 15%;
+    img { @include img-fluid; }
+}
+.img2 { width: 50%; padding-right: 5%; padding-left: 5%;
+    img { @include img-fluid; }
+}
+
+.textoppal { padding-left: 5%; padding-right: 5%; }
+
+.bg-pink { background: $pink-soft; }
+
+.contact-column { background: $column; width: min(320px, 90vw); border-radius: 12px; }
+
+.contact-photo {
+    width: 160px; aspect-ratio: 1 / 1;
+    border: 2px solid $pink;
+    background: transparent; color: $pink;
+    font-size: 1.5rem; border-radius: 999px;
+}
+
+.contact-img { width: 100%; height: 100%; object-fit: cover; }
+
+.marca, .rrss-links { @include flex(center, center); }
+
+.rrss-links { padding: 2%; }
+
+.rrss-links a img { display: flex; width: 30px; }
+
+@media (max-width: $bp-sm) {
+    .nav-custom ul { flex-direction: column; align-items: center; gap: .5rem; }
+    header { padding: 0 4%; }
+}
+
+//usuarios que tienen menos movimiento
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
