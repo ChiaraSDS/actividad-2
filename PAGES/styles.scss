@@ -196,11 +196,12 @@ header .nav-custom {
     img { @include img-fluid; }
 }
 
-.row.ind-sec1 { display: block; } // evitar forzar flex
-.ind-sec1 {
-    height: auto;
-    margin: 0;
+.row.ind-sec1 { 
+    display: flex !important; 
+    flex-wrap: wrap; 
+    align-items: center; 
 }
+.ind-sec1 { height: auto !important; margin: 0; }
 
 .pag-sec1 { @include flex(center, flex-start); }
 
@@ -217,13 +218,8 @@ header .nav-custom {
 
 .bot1 { justify-content: center; }
 
-.img1, .img2 {
-    width: 100% !important;
-    padding: 0 !important;
-}
-.img1 img, .img2 img {
-    @include img-fluid;
-} 
+.img1, .img2 { width: 100% !important; padding: 0 !important; }
+.img1 img, .img2 img { max-width: 100%; height: auto; display: block; }
 
 .textoppal { padding-left: 5%; padding-right: 5%; }
 
