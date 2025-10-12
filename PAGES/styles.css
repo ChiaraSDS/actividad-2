@@ -513,6 +513,17 @@ body {
   font-family: "Outfit";
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -563,20 +574,28 @@ header .nav-custom {
   text-decoration: underline;
 }
 
-.nav-custom a {
-  white-space: normal;
-}
-
 @media (min-width: 992px) {
+  .nav-custom ul {
+    flex-wrap: nowrap;
+  }
   .nav-custom a {
     white-space: nowrap;
   }
 }
 @media (max-width: 991.98px) {
-  header .nav-custom ul {
+  .nav-custom ul {
+    flex-wrap: wrap; /* permite que pase a 2 líneas */
     justify-content: center;
+    gap: 0.75rem; /* usar gap en lugar de márgenes percentuales */
     width: 100%;
   }
+  .nav-custom li {
+    margin: 0; /* anula margin: 5% que provoca desborde */
+    padding: 0 0.25rem;
+  }
+  .nav-custom a {
+    white-space: normal;
+  } /* permite cortar */
 }
 .button {
   display: inline-flex;
@@ -706,12 +725,14 @@ header .nav-custom {
 }
 
 .rrss-links {
-  padding: 2%;
+  width: 100%;
   background: linear-gradient(90deg, #ff9ada, #ffffff);
   background-size: 200% 200%;
-  animation: rrssGradient 10s infinite alternate;
+  animation: rrssGradient 12s infinite alternate;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  /* asegura que el fondo se vea aunque tenga solo imágenes */
+  min-height: 64px;
 }
 
 @keyframes rrssGradient {
@@ -736,13 +757,23 @@ header .nav-custom {
   header {
     padding: 0 4%;
   }
+  .sm-img1 {
+    width: 100%;
+    padding-left: 0;
+  }
+  .img2 {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .img1 {
+    width: min(250px, 80vw);
+    padding-left: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
-    animation: none !important;
-  }
-  * .rrss-links {
     animation: none !important;
   }
 }
