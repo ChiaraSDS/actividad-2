@@ -163,9 +163,9 @@ header .nav-custom {
     flex: 0 1 auto; 
 }
 .nav-custom {
-    ul { @include flex(flex-end, center, nowrap); list-style: none; padding: 0; margin: 0; }
-    li { margin: 5%; padding: 0 2%; }
-    a  { text-decoration: none; color: $text; display: inline-block; white-space: nowrap;
+    ul { @include flex(flex-end, center, nowrap); gap: .75rem; list-style: none; padding: 0; margin: 0; }
+    li { margin: 0; padding: 0 2%; flex: 0 0 auto;}
+    a  { text-decoration: none; color: $text; display: block; white-space: nowrap;
             &:hover { text-decoration: underline; } }
 }
 
@@ -178,7 +178,7 @@ header .nav-custom {
     .nav-custom ul {
         flex-wrap: wrap;      
         justify-content: center;
-        gap: .75rem;          
+        gap: .5rem;          
         width: 100%;
     }
     .nav-custom li {
@@ -188,6 +188,10 @@ header .nav-custom {
     .nav-custom a { white-space: normal; } 
     }
 
+@media (min-width: 992px) {
+    header .container-fluid { flex-wrap: nowrap; }
+    .nav-custom ul { flex-wrap: nowrap !important; }
+}
 .button { @include btn-base; margin-top: 2%; padding: 5%; background-color: $pink; border-radius: 3px; }
 
 .parrafo1 { font-weight: bold; }
@@ -218,7 +222,7 @@ header .nav-custom {
 
 .bot1 { justify-content: center; }
 
-.img1, .img2 { width: 100% !important; padding: 0 !important; }
+.img1, .img2 { padding: 0 !important; }
 .img1 img, .img2 img { max-width: 100%; height: auto; display: block; }
 
 .textoppal { padding-left: 5%; padding-right: 5%; }
