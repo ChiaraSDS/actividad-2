@@ -165,7 +165,7 @@ header .nav-custom {
 .nav-custom {
     ul{
         display:flex; align-items:center; justify-content:flex-end;
-        flex-wrap: nowrap;                 /* una línea por defecto */
+        flex-wrap: nowrap;                 
         gap:.75rem; list-style:none; margin:0; padding:0;
     }
     li{
@@ -262,11 +262,10 @@ header .nav-custom {
     background: transparent; color: $pink;
     font-size: 1.5rem; border-radius: 999px;
 }
-
 .hero-img {
     display: block;
-    margin: 0 auto;    
-    max-width: 1100px; 
+    margin: 0 auto;     
+    max-width: 1100px;  
     width: 100%;
     border-radius: 12px;
 }
