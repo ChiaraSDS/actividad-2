@@ -232,9 +232,9 @@ header .nav-custom {
 }
 .ind-sec1 { height: auto !important; margin: 0; }
 
-.pag-sec1 { @include flex(center, flex-start); }
+.pag-sec1 { justify-content: center; align-items: flex-start; }
 
-.pag-sec2 { @include flex(space-evenly, center); }
+.pag-sec2 { justify-content: center; align-items: center; }
 
 .pat-sec1 { h2, p { text-align: center; } }
 
